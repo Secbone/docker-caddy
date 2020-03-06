@@ -15,4 +15,4 @@ COPY Caddyfile /srv/Caddyfile
 COPY index.html /www/index.html
 
 ENTRYPOINT ["/usr/bin/caddy", "run"]
-CMD ["--conf", "/srv/Caddyfile"]
+CMD ["-config", "/srv/Caddyfile"]

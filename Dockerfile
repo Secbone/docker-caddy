@@ -14,5 +14,5 @@ EXPOSE 80 443
 COPY Caddyfile /srv/Caddyfile
 COPY index.html /www/index.html
 
-ENTRYPOINT ["/usr/bin/caddy"]
+ENTRYPOINT ["/usr/bin/caddy", "run"]
 CMD ["--conf", "/srv/Caddyfile"]

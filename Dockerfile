@@ -1,19 +1,14 @@
-FROM alpine
+ARG VERSION=2.8.4
+
+FROM caddy:$VERSION-builder AS builder
+
+RUN xcaddy build \
+    --with github.com/caddy-dns/cloudflare
+
+FROM caddy:$VERSION
 LABEL maintainer "Secbone <secbone@gmail.com>"
 
-ARG VERSION=v2.0.0-beta.15
-ARG DOWNLOAD_URL=https://github.com/caddyserver/caddy/releases/download/$VERSION/caddy2_beta15_linux_amd64
-LABEL caddy_version="$VERSION"
+VOLUME /etc/caddy /data /config /srv
 
-VOLUME /srv /www /root/.config/caddy
-
-WORKDIR /srv
-
-RUN wget -O /usr/bin/caddy $DOWNLOAD_URL && chmod +x /usr/bin/caddy
-
-EXPOSE 80 443
-
-COPY Caddyfile /srv/Caddyfile
-
-ENTRYPOINT ["/usr/bin/caddy", "run"]
-CMD ["-config", "/srv/Caddyfile"]
+COPY --from=builder /usr/bin/caddy /usr/bin/caddy
+COPY Caddyfile /etc/caddy/Caddyfile

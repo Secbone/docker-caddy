@@ -9,11 +9,11 @@
 ## Usage
 
 ```
-docker pull secbone/caddy
+docker pull ghcr.io/secbone/caddy
 ```
 
 ```
-docker run -d -v /path/to/Caddyfile:/srv/Caddyfile -p 80:80 -p 443:443 secbone/caddy
+docker run -d -v /path/to/Caddyfile:/etc/caddy/Caddyfile -p 80:80 -p 443:443 ghcr.io/secbone/caddy
 ```
 
 

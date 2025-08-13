@@ -1,9 +1,10 @@
-ARG VERSION=2.8.4
+ARG VERSION=2.10.0
 
 FROM caddy:$VERSION-builder AS builder
 
 RUN xcaddy build \
     --with github.com/caddy-dns/cloudflare
+    --with github.com/mholt/caddy-l4
 
 FROM caddy:$VERSION
 LABEL maintainer "Secbone <secbone@gmail.com>"
